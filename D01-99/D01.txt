@@ -1,0 +1,176 @@
+https://www.geeksforgeeks.org/problems/reverse-a-string/1
+Time complexity O(n)
+// User function Template for Java
+
+class Solution {
+    public static String reverseString(String s) {
+        // code here
+        StringBuilder sb= new StringBuilder(s);
+        return sb.reverse().toString();
+    }
+}
+-------------------------------------------------------------
+// User function Template for Java
+
+class Solution {
+    public static String reverseString(String s) {
+        // code here
+        char[] ch= s.toCharArray();
+        int n=s.length();
+        int left=0, right=n-1;
+        
+        while(left<right)
+        {
+            char temp = ch[left];
+            ch[left] = ch[right];
+            ch[right] = temp;
+            
+            left++;
+            right--;
+        }
+        return new String(ch);
+    }
+}
+
+_________________________________________________________________________________________
+
+https://www.geeksforgeeks.org/problems/find-minimum-and-maximum-element-in-an-array4428/1
+Time complexity O(n)
+class Solution {
+    public ArrayList<Integer> getMinMax(int[] arr) {
+        // code Here
+        int min=arr[0];
+        int max=arr[0];
+        
+        for(int i: arr)
+        {
+            if (i<min) min=i;
+            else if (i>max) max=i;
+        }
+        
+        ArrayList<Integer> li= new ArrayList<>(2);
+        li.add(min);
+        li.add(max);
+        return li;
+    }
+}
+
+Pair Comparision BONUS
+__________________________________________________________________________________________
+
+https://www.geeksforgeeks.org/problems/kth-smallest-element5635/1
+Time Complexity O(n log n)
+class Solution {
+    public int kthSmallest(int[] arr, int k) {
+        // Code here
+        Arrays.sort(arr);
+        return arr[k-1];
+    }
+}
+-----------------------------------------------------------------------------------
+*QuickSelect*
+Time complexity O(n) avg / O(n²) worst
+class Solution {
+    public int kthSmallest(int[] arr, int k) {
+        // Code here
+      int low = 0, high = arr.length - 1;
+      int target = k-1;
+      
+      while(low<=high)
+      {
+          int pivotIndex = partition(arr, low, high);
+          
+          if(pivotIndex == target)
+          {
+              return arr[pivotIndex];
+          }
+          else if(pivotIndex > target)
+          {
+              high = pivotIndex - 1;
+          }
+          else
+          {
+              low = pivotIndex + 1;
+          }
+      }
+      return -1;
+    }
+    public int partition(int arr[], int low, int high)
+    {
+        int pivot = arr[high];
+        int i = low;
+        
+        for(int j=low; j<high; j++)
+        {
+            if(arr[j]<= pivot)
+            {
+                swap(arr, j, i);
+                i++;
+            }
+        }
+        swap(arr, i, high);
+        return i;
+    }
+    
+    public void swap (int arr[], int a, int b)
+    {
+        int temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp; 
+    }
+}
+------------------------------------------------------------
+Using random
+
+class Solution {
+    public int kthSmallest(int[] arr, int k) {
+        // Code here
+      int low = 0, high = arr.length - 1;
+      int target = k-1;
+      Random r = new Random();
+      
+      while(low<=high)
+      {
+          int randomIndex = low + r.nextInt(high - low + 1);
+          swap(arr, high, randomIndex);
+          int pivotIndex = partition(arr, low, high);
+          
+          if(pivotIndex == target)
+          {
+              return arr[pivotIndex];
+          }
+          else if(pivotIndex > target)
+          {
+              high = pivotIndex - 1;
+          }
+          else
+          {
+              low = pivotIndex + 1;
+          }
+      }
+      return -1;
+    }
+    public int partition(int arr[], int low, int high)
+    {
+        int pivot = arr[high];
+        int i = low;
+        
+        for(int j=low; j<high; j++)
+        {
+            if(arr[j]<= pivot)
+            {
+                swap(arr, j, i);
+                i++;
+            }
+        }
+        swap(arr, i, high);
+        return i;
+    }
+    
+    public void swap (int arr[], int a, int b)
+    {
+        int temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp; 
+    }
+}
