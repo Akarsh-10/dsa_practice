@@ -1,0 +1,133 @@
+https://www.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s4231/1
+Time: O(n)
+Space: O(1)
+✔ Optimal for counting approach
+
+class Solution {
+    public void sort012(int[] arr) {
+        // code here
+        int c0=0, c1=0, c2=0;
+        
+        for(int i=0; i<arr.length; i++)
+        {
+            if(arr[i]==0) c0++;
+            else if(arr[i]==1) c1++;
+            else c2++;
+        }
+        
+        int index=0;
+        
+            while(c0>0)
+            {
+                arr[index++]=0;
+                c0--;
+            }
+            while(c1>0)
+            {
+                arr[index++]=1;
+                c1--;
+            }
+            while(c2>0)
+            {
+                arr[index++]=2;
+                c2--;
+            }
+        
+    }
+}
+-------------------------------------------------------
+
+DUTCH FLAG
+Time: O(n) (single pass)
+Space: O(1)
+
+class Solution {
+    public void sort012(int[] arr) {
+        // code here
+        int low = 0;
+        int mid = 0;
+        int high = arr.length-1;
+        
+        while(mid<=high)
+        {
+            if(arr[mid]==0)
+            {
+                swap(arr, mid, low);
+                low++;
+                mid++;
+            }
+            else if(arr[mid]==1)
+            {
+                mid++;
+            }
+            else if(arr[mid]==2)
+            {
+                swap(arr, mid, high);
+                high--;
+            }
+        }
+    }
+    
+    public void swap(int[]arr, int a, int b)
+    {
+        int temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    }
+}
+
+______________________________________________________________________________
+
+https://www.geeksforgeeks.org/problems/move-all-negative-elements-to-end1813/1
+Time Complexity O(n)
+
+class Solution {
+    public void segregateElements(int[] arr) {
+        // code here
+        
+    int[]temp =new int[arr.length];
+    
+    int index=0;
+    for(int i:arr)
+    {
+        if(i>=0)
+        {
+            temp[index++]=i;
+        }
+    }
+    for(int i:arr)
+    {
+        if(i<0)
+        {
+            temp[index++]=i;
+        }
+    }
+    for(int i=0;i<arr.length;i++)
+    {
+        arr[i]=temp[i];
+    }
+}
+}
+
+________________________________________________________________
+
+https://www.geeksforgeeks.org/problems/union-of-two-arrays3538/1
+Time Complexity O(n+m)
+
+class Solution {
+    public static ArrayList<Integer> findUnion(int[] a, int[] b) {
+        // code here
+        Set<Integer> set= new HashSet<>();
+        for(int i:a)
+        {
+            set.add(i);
+        }
+        for(int i:b)
+        {
+            set.add(i);
+        }
+        return new ArrayList<>(set);
+    }
+}
+
+Can use TWO POINTERS as well
