@@ -1,0 +1,128 @@
+https://www.geeksforgeeks.org/problems/cyclically-rotate-an-array-by-one2614/1
+Time: O(n)
+Space: O(n)
+
+Not the most optimal because of space
+// // User function Template for Java
+
+class Solution {
+    public void rotate(int[] arr) {
+        // code here
+        int[]arr2= new int[arr.length];
+        
+        for(int i=0;i<arr.length; i++)
+        {
+            arr2[(i+1)%arr.length]=arr[i];
+        }
+        for(int i=0;i<arr.length;i++)
+        {
+            arr[i]=arr2[i];
+        }
+    }
+}
+
+-----------------------------------------------------------
+
+Optimal
+Time: O(n)
+Space: O(1)
+
+// // User function Template for Java
+
+class Solution {
+    public void rotate(int[] arr) {
+        // code here
+        int n = arr.length;
+        int last = arr[n-1];
+        
+        for(int i = n-1; i>0; i--)
+        {
+            arr[i] = arr[i-1];
+        }
+        
+        arr[0] = last;
+    }
+}
+-------------------------------------------------------------------
+
+For K shifts in cyclic
+
+// // User function Template for Java
+
+class Solution {
+    public void rotate(int[] arr) {
+        // code here
+        int n = arr.length;
+        int k = 1;
+        k = k % n;
+        
+        reverse(arr, 0, n-1);
+        reverse(arr, 0, k-1);
+        reverse(arr, k, n-1);
+    }
+    public void reverse(int[] arr, int first, int last)
+    {
+        while(first<last)
+        {
+            int temp = arr[first];
+            arr[first++]=arr[last];
+            arr[last--]=temp;
+        }
+        
+    }
+}
+
+
+____________________________________________________________________
+
+https://www.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1
+
+Kadane's algorithm
+O(n) Time and O(1) Space
+
+class Solution {
+    int maxSubarraySum(int[] arr) {
+        // Code here
+        int maxsum = arr[0];
+        int currentsum = arr[0];
+        
+        for(int i=1; i<arr.length; i++)
+        {
+            
+            currentsum = Math.max(arr[i], currentsum + arr[i]);
+            
+            maxsum = Math.max(maxsum, currentsum);
+        }
+        return maxsum;
+    }
+}
+
+______________________________________________________________________
+
+https://www.geeksforgeeks.org/problems/subarray-with-0-sum-1587115621/1
+Time: O(n)
+Space: O(n)
+
+class Solution {
+    // Function to check whether there is a subarray present with 0-sum or not.
+    static boolean findsum(int arr[]) {
+        // Your code here
+        Set<Integer> set= new HashSet<>();
+        
+        int sum=0;
+        
+        for( int num: arr)
+        {
+            sum += num;
+            
+            if(sum == 0 || set.contains(sum))
+            {
+                return true;
+            }
+            
+            set.add(sum);
+        }
+        
+        return false;
+    }
+}
