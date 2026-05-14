@@ -1,0 +1,32 @@
+https://www.geeksforgeeks.org/problems/overlapping-intervals--170633/1
+Time: O(n log n)
+Space: O(n)
+
+class Solution {
+    public ArrayList<int[]> mergeOverlap(int[][] arr) {
+        // Code here
+        Arrays.sort(arr, (a,b) -> a[0] - b[0]);
+        ArrayList<int[]> li = new ArrayList<>(); 
+        int interval[]= arr[0];
+        
+        for(int []curr: arr)
+        {
+            if(curr[0] <= interval[1])
+            {
+                interval[1] = Math.max(interval[1], curr[1]);
+            }
+            else
+            {
+                li.add(interval);
+                interval=curr;
+            }
+        }
+        li.add(interval);
+        
+        return li;
+    }
+}
+
+
+___________________________________________________________________________
+
